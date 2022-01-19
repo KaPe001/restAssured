@@ -4,15 +4,11 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import models.DataStore;
-import models.Student;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.*;
 
 public class AsanaTest {
@@ -23,20 +19,18 @@ public class AsanaTest {
     public void shouldGetWorkspaces() {
         when()
                 .get("https://app.asana.com/api/1.0/workspaces").
-        then()
+                then()
                 .statusCode(200);
     }
-
-
 
     @Test
     public void requestSpec() {
         given()
-                .param("q","London,uk")
+                .param("q", "London,uk")
                 .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                 .log()
                 .all().
-        when()
+                when()
                 .get("https://samples.openweathermap.org/data/2.5/weather")
                 .then()
                 .log()
@@ -50,14 +44,14 @@ public class AsanaTest {
         RequestSpecification requestSpec =
                 given()
                         .header("name", "Kinga")
-                        .param("q","London,uk")
+                        .param("q", "London,uk")
                         .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                         .log()
                         .all();
 
         given()
                 .spec(requestSpec).
-        when()
+                when()
                 .get("https://samples.openweathermap.org/data/2.5/weather")
                 .then()
                 .log()
@@ -78,13 +72,13 @@ public class AsanaTest {
                 .statusCode(200);
 
         given()
-                .param("q","London,uk")
+                .param("q", "London,uk")
                 .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                 .log()
                 .all().
-        when()
+                when()
                 .get("https://samples.openweathermap.org/data/2.5/weather").
-        then()
+                then()
                 .spec(responseSpec);
     }
 
@@ -93,18 +87,18 @@ public class AsanaTest {
         RequestSpecification requestSpec =
                 given()
                         .header("name", "Kinga")
-                        .param("q","London,uk")
+                        .param("q", "London,uk")
                         .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                         .log()
                         .all();
 
 
         DataStore.WINDSPEED = given()
-                .param("q","London,uk")
+                .param("q", "London,uk")
                 .param("appid", "b1b15e88fa797225412429c1c50c122a1").
-        when()
+                when()
                 .get("https://samples.openweathermap.org/data/2.5/weather").
-        then()
+                then()
                 .log()
                 .all()
                 .extract()
@@ -118,22 +112,21 @@ public class AsanaTest {
         RequestSpecification requestSpec =
                 given()
                         .header("name", "Kinga")
-                        .param("q","London,uk")
+                        .param("q", "London,uk")
                         .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                         .log()
                         .all();
 
-
         DataStore.COUNTRY = given()
                 .spec(requestSpec).
                 when()
-                    .get("https://samples.openweathermap.org/data/2.5/weather").
+                .get("https://samples.openweathermap.org/data/2.5/weather").
 //                  .post("https://samples.openweathermap.org/data/2.5/weather" + DataStore.COUNTRY + "/country")
-                then()
-                    .log()
-                    .all()
-                    .extract()
-                    .path("sys.country");
+        then()
+                .log()
+                .all()
+                .extract()
+                .path("sys.country");
 
         System.out.println("Country is:  " + DataStore.COUNTRY);
     }
@@ -142,17 +135,16 @@ public class AsanaTest {
     public void isWindSpeedCorrect() {
         RequestSpecification requestSpec = given()
                 .header("name", "Kinga")
-                .param("q","London,uk")
+                .param("q", "London,uk")
                 .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                 .log()
                 .all();
-
 
         given()
                 .spec(requestSpec).
                 when()
                 .get("https://samples.openweathermap.org/data/2.5/weather").
-        then()
+                then()
                 .log()
                 .all()
                 .body("wind.speed", is(4.1f))
@@ -165,11 +157,10 @@ public class AsanaTest {
     public void isNameCorrect() {
         RequestSpecification requestSpec = given()
                 .header("name", "Kinga")
-                .param("q","London,uk")
+                .param("q", "London,uk")
                 .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                 .log()
                 .all();
-
 
         given()
                 .spec(requestSpec).
@@ -186,17 +177,16 @@ public class AsanaTest {
     public void isWindSpeedCorrectNotKnowingValue() {
         RequestSpecification requestSpec = given()
                 .header("name", "Kinga")
-                .param("q","London,uk")
+                .param("q", "London,uk")
                 .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                 .log()
                 .all();
 
-
         given()
                 .spec(requestSpec).
-        when()
+                when()
                 .get("https://samples.openweathermap.org/data/2.5/weather").
-        then()
+                then()
                 .log()
                 .all()
                 .body("wind.speed", greaterThan(4.0f))
@@ -207,17 +197,16 @@ public class AsanaTest {
     public void isCountryCorrectInMap() {
         RequestSpecification requestSpec = given()
                 .header("name", "Kinga")
-                .param("q","London,uk")
+                .param("q", "London,uk")
                 .param("appid", "b1b15e88fa797225412429c1c50c122a1")
                 .log()
                 .all();
 
-
         given()
                 .spec(requestSpec).
-        when()
+                when()
                 .get("https://samples.openweathermap.org/data/2.5/weather").
-        then()
+                then()
                 .log()
                 .all()
 //                .body("sys", hasEntry("country", "GB"))
