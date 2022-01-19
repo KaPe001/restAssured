@@ -11,7 +11,8 @@ public class Homework extends TestBase{
     public void getWeather() {
 
         given()
-                .spec(getRequest()).
+                .spec(getRequest("q", "London, gb"))
+                .spec(getRequest("appid", "b1b15e88fa797225412429c1c50c122a1")).
         when()
                 .get().
         then()
