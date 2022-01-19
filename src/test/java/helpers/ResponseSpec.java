@@ -14,7 +14,6 @@ public class ResponseSpec {
                 .expectResponseTime(Matchers.lessThan(5000L))
                 .expectContentType(ContentType.JSON);
 
-        ResponseSpecification responseSpec = responseSpecBuilder.build();
-        return responseSpec;
+        return responseSpecBuilder.build();
     }
 }

@@ -13,7 +13,6 @@ public class RequestSpec {
                 .addParam("q", "London, uk")
                 .addParam("appid", "b1b15e88fa797225412429c1c50c122a1");
 
-        RequestSpecification requestSpec = requestSpecBuilder.build();
-        return requestSpec;
+        return requestSpecBuilder.build();
     }
 }
