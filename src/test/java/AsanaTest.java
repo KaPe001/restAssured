@@ -17,8 +17,6 @@ import static org.hamcrest.Matchers.*;
 
 public class AsanaTest {
 
-    HashMap<String, String> studentMap = new HashMap<>();
-    Student student;
     float speedWind;
 
     @Test
@@ -29,90 +27,7 @@ public class AsanaTest {
                 .statusCode(200);
     }
 
-    @Test
-    public void postNewStudent() {
-        String requestBody =
-                "{\n" +
-                        "    \"first_name\": \"Angelina\",\n" +
-                        "    \"middle_name\": \"Jolie\",\n" +
-                        "    \"last_name\": \"Camila\",\n" +
-                        "    \"date_of_birth\": \"01/03/1977\"\n" +
-                        "}";
 
-        given()
-                .baseUri("http://www.thetestingworldapi.com/")
-                .basePath("api/studentsDetails")
-                .contentType(ContentType.JSON)
-                .log()
-                .body().
-        when()
-                .body(requestBody)
-                .post().
-        then()
-                .log()
-                .all()
-                .statusCode(201);
-    }
-
-    @Test
-    public void postAnotherStudent() {
-
-        studentMap.put("first_name","Brad");
-        studentMap.put("middle_name","Janusz");
-        studentMap.put("last_name","Pitt");
-        studentMap.put("date_of_birth","01/03/1977");
-
-        given()
-                .baseUri("http://www.thetestingworldapi.com/")
-                .basePath("api/studentsDetails")
-                .contentType(ContentType.JSON)
-                .log()
-                .body().
-        when()
-                .body(studentMap)
-                .post().
-        then()
-                .log()
-                .all()
-                .statusCode(201);
-    }
-
-    @Test
-    public void postStudent() {
-        student = new Student("Salma", "Joanna", "Hayek", "01/03/1977");
-
-        given()
-                .baseUri("http://www.thetestingworldapi.com/")
-                .basePath("api/studentsDetails")
-                .contentType(ContentType.JSON)
-                .log()
-                .body().
-        when()
-                .body(student)
-                .post().
-        then()
-                .log()
-                .all()
-                .statusCode(201);
-    }
-
-    @Test
-    public void postOMGANOTHERStudent() {
-
-        given()
-                .baseUri("http://www.thetestingworldapi.com/")
-                .basePath("api/studentsDetails")
-                .contentType(ContentType.JSON)
-                .log()
-                .body().
-        when()
-                .body(new File("src/test/resources/student.json"))
-                .post()
-                .then()
-                .log()
-                .all()
-                .statusCode(201);
-    }
 
     @Test
     public void requestSpec() {
