@@ -5,6 +5,8 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.ResponseSpecification;
 import org.hamcrest.Matchers;
 
+import static org.hamcrest.Matchers.*;
+
 public class ResponseSpec {
 
     public static ResponseSpecification getResponse() {
@@ -12,7 +14,12 @@ public class ResponseSpec {
         responseSpecBuilder
                 .expectStatusCode(200)
                 .expectResponseTime(Matchers.lessThan(5000L))
-                .expectContentType(ContentType.JSON);
+                .expectContentType(ContentType.JSON)
+                .expectBody("sys", hasValue("GB"))
+                .expectBody("name", equalTo("London"))
+                .expectBody("wind.speed", greaterThan(4.0f))
+                .expectBody("coord.lon", lessThan(0.0f))
+                .expectBody("coord.lat", lessThan(52.0f));
 
         return responseSpecBuilder.build();
     }
