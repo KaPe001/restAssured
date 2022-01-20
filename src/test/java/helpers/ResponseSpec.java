@@ -15,10 +15,10 @@ public class ResponseSpec {
                 .expectStatusCode(200)
                 .expectResponseTime(Matchers.lessThan(5000L))
                 .expectContentType(ContentType.JSON)
-                .expectBody("sys", hasValue("GB"))
-                .expectBody("name", equalTo("London"))
-                .expectBody("wind.speed", greaterThan(4.0f))
-                .expectBody("coord.lon", lessThan(0.0f))
+                .expectBody("sys", hasValue("PL"))
+                .expectBody("name", equalTo("Rzeszów"))
+                .expectBody("wind.speed", greaterThan(1.0f))
+                .expectBody("coord.lon", lessThan(22.0f))
                 .expectBody("coord.lat", lessThan(52.0f));
 
         return responseSpecBuilder.build();
