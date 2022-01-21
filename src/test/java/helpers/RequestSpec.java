@@ -10,7 +10,7 @@ public class RequestSpec {
         requestSpecBuilder
                 .setBaseUri("https://api.openweathermap.org/data/2.5")
                 .setBasePath("/weather")
-                .addParam("appid", "89a2ed8a594cc497a6273490e7ca59dd")
+                .addParam("appid", "ca3971e3d9a9b7b9f19b601ff387cb38")
                 .addParam(paramName, paramValue);
 
         return requestSpecBuilder.build();
