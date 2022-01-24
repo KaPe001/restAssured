@@ -1,10 +1,8 @@
 package helpers;
 
 import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.http.ContentType;
 import io.restassured.specification.ResponseSpecification;
 import models.Cities;
-import org.hamcrest.Matchers;
 
 import static org.hamcrest.Matchers.*;
 
@@ -14,8 +12,6 @@ public class ResponseSpec {
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
         responseSpecBuilder
                 .expectStatusCode(200)
-                .expectResponseTime(Matchers.lessThan(5000L))
-                .expectContentType(ContentType.JSON)
                 .expectBody("sys", hasValue("US"))
                 .expectBody("name", equalTo("Miami"))
                 .expectBody("id", is(4164138))
@@ -29,8 +25,6 @@ public class ResponseSpec {
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
         responseSpecBuilder
                 .expectStatusCode(200)
-                .expectResponseTime(Matchers.lessThan(5000L))
-                .expectContentType(ContentType.JSON)
                 .expectBody("sys", hasValue(cities.getCountry()))
                 .expectBody("name", equalTo(cities.getCityName()))
                 .expectBody("id", is(cities.getCityId()))

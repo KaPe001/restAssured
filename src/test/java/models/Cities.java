@@ -3,7 +3,7 @@ package models;
 public enum Cities {
 
     LONDON("London", "GB", 2643743, -0.1257f, 51.5085f),
-    RZESZOW("Rzeszów", "PL", 759734,21.999f, 50.0413f),
+    RZESZOW("Rzeszów", "PL", 759734, 21.999f, 50.0413f),
     MIAMI("Miami", "US", 4164138, -80.1937f, 25.7743f);
 
     private final String cityName;

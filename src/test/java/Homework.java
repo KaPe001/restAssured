@@ -9,16 +9,16 @@ import static helpers.ResponseSpec.getResponseFromEnum;
 import static io.restassured.RestAssured.given;
 
 
-public class Homework extends TestBase{
+public class Homework extends TestBase {
 
     @Test
     public void getWeather() {
 
         given()
                 .spec(getRequest("q", "Miami, USA")).
-        when()
+                when()
                 .get().
-        then()
+                then()
                 .spec(getResponse());
     }
 
@@ -27,10 +27,10 @@ public class Homework extends TestBase{
     public void practiceWithEnum(Cities cities) {
         given()
                 .spec(getRequest("q",
-                        cities.getCityName() +"," + cities.getCountry())).
-        when()
+                        cities.getCityName() + "," + cities.getCountry())).
+                when()
                 .get().
-        then()
+                then()
                 .spec(getResponseFromEnum(cities));
     }
 }
