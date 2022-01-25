@@ -1,5 +1,6 @@
 package helpers;
 
+import configuration.Property;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;
 import models.Cities;
@@ -7,24 +8,12 @@ import models.Cities;
 import static org.hamcrest.Matchers.*;
 
 public class ResponseSpec {
-
-    public static ResponseSpecification getResponse() {
-        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
-        responseSpecBuilder
-                .expectStatusCode(200)
-                .expectBody("sys", hasValue("US"))
-                .expectBody("name", equalTo("Miami"))
-                .expectBody("id", is(4164138))
-                .expectBody("coord.lon", lessThanOrEqualTo(-80.0f))
-                .expectBody("coord.lat", greaterThanOrEqualTo(25.0f));
-
-        return responseSpecBuilder.build();
-    }
+    private static Property property;
 
     public static ResponseSpecification getResponseFromEnum(Cities cities) {
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
         responseSpecBuilder
-                .expectStatusCode(200)
+                .expectStatusCode(property.getExpectedSuccessCode())
                 .expectBody("sys", hasValue(cities.getCountry()))
                 .expectBody("name", equalTo(cities.getCityName()))
                 .expectBody("id", is(cities.getCityId()))
