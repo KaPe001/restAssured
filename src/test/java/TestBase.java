@@ -1,5 +1,4 @@
 import configuration.Property;
-import configuration.PropertyConfig;
 import configuration.yamlReader.YamlReader;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -15,14 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestBase {
-    public static Property property;
     public static Logger logger = LoggerFactory.getLogger(YamlReader.class);
-
+    public static Property property;
 
     @BeforeAll
     public static void setUp() {
-
-        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         RestAssured.authentication = RestAssured.oauth2("1/1201629892164949:d726687d7214eb9fe9e023fb2acd6309");
 
@@ -38,7 +34,8 @@ public class TestBase {
                 .setBasePath(property.getBasePath())
 //                .setBaseUri("https://api.openweathermap.org/data/2.5")
 //                .setBasePath("/weather")
-                .build();
+                .build()
+                .filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
     public static ResponseSpecification setCommonResponse() {
@@ -49,5 +46,4 @@ public class TestBase {
                 .expectContentType(ContentType.JSON)
                 .build();
     }
-
 }

@@ -1,8 +1,7 @@
-properties:
-  - baseUri: https://api.openweathermap.org/data/2.5
-    basePath: /weather
-    appid: ca3971e3d9a9b7b9f19b601ff387cb38
-    expectedRespTime: 5000
-    expectedContentType: ContentType.JSON
-    expectedSuccessCode: 200
+baseUri: https://api.openweathermap.org/data/2.5
+basePath: /weather
+appid: ca3971e3d9a9b7b9f19b601ff387cb38
+expectedRespTime: 5000
+expectedContentType: ContentType.JSON
+expectedSuccessCode: 200
 

@@ -1,6 +1,5 @@
 package configuration.yamlReader;
 
-import configuration.Property;
 import configuration.PropertyConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +8,11 @@ import org.yaml.snakeyaml.constructor.Constructor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 public class YamlReader {
     public Logger logger = LoggerFactory.getLogger(YamlReader.class);
-    private List<Property> properties;
+    private Map<String, String> properties;
 
     public YamlReader() {
         try {

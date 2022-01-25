@@ -8,6 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Property {
+    PropertyConfig propertyConfig;
+
     private String baseUri;
     private String basePath;
     private String appid;
