@@ -1,4 +1,5 @@
 import configuration.Property;
+import configuration.PropertyConfig;
 import configuration.yamlReader.YamlReader;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class TestBase {
     public static Logger logger = LoggerFactory.getLogger(YamlReader.class);
-    public static Property property;
+    public static PropertyConfig property;
 
     @BeforeAll
     public static void setUp() {
@@ -30,8 +31,8 @@ public class TestBase {
 
     public static RequestSpecification setCommonRequest() {
         return new RequestSpecBuilder()
-                .setBaseUri(property.getBaseUri()) //null
-                .setBasePath(property.getBasePath())
+                .setBaseUri(property.getProperties().get("baseUri")) //null
+                .setBasePath(property.getProperties().get("basePath"))
 //                .setBaseUri("https://api.openweathermap.org/data/2.5")
 //                .setBasePath("/weather")
                 .build()
@@ -39,10 +40,10 @@ public class TestBase {
     }
 
     public static ResponseSpecification setCommonResponse() {
-        Long expectedResponseTime = property.getExpectedRespTime();
-        logger.info("Common request used");
+        String expectedResponseTime = property.getProperties().get("expectedRespTime");
+        Long responseTime = Long.parseLong(expectedResponseTime);
         return new ResponseSpecBuilder()
-                .expectResponseTime(Matchers.lessThan(expectedResponseTime))
+                .expectResponseTime(Matchers.lessThan(responseTime))
                 .expectContentType(ContentType.JSON)
                 .build();
     }

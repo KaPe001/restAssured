@@ -1,6 +1,7 @@
 import models.Cities;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import testBase.TestBase;
 
 import static helpers.RequestSpec.getRequest;
 import static helpers.ResponseSpec.getResponseFromEnum;
