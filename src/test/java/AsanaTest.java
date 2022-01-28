@@ -8,7 +8,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.*;
 
 public class AsanaTest {
@@ -17,9 +16,16 @@ public class AsanaTest {
 
     @Test
     public void shouldGetWorkspaces() {
+
+        given().auth()
+                .oauth2("1/1201629892164949:a7ad060d2e88f4b4abc1fd2ee0e5e76d")
+                .log()
+                .all().
         when()
                 .get("https://app.asana.com/api/1.0/workspaces").
                 then()
+                .log()
+                .all()
                 .statusCode(200);
     }
 

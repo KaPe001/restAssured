@@ -3,11 +3,9 @@ package stepsDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
 import models.Workspace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import testBase.Data;
 import testBase.TestBase;
 import utils.JsonConnector;
 import utils.RequestBuilder;
@@ -38,7 +36,7 @@ public class AsanaSteps extends TestBase {
         response.then()
                 .log()
                 .all()
-                .body("data[0].name", is(workspace.getName()))
+                .body("data[0].projectName", is(workspace.getName()))
                 .body("data[0].gid", is(workspace.getGid()))
                 .body("data[0].resource_type", is(workspace.getResource_type()))
                 .statusCode(200);

@@ -1,24 +1,32 @@
 package utils;
 
 import io.restassured.response.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import testBase.TestBase;
+
+import java.io.File;
 
 import static io.restassured.RestAssured.given;
 
+@Slf4j
 public class RequestBuilder extends TestBase {
-    private static Logger logger = LoggerFactory.getLogger(RequestBuilder.class);
 
-    //work with workspace
     public Response sendGET_workspace(String token) {
-        Response response =
-                given().auth()
-                        .oauth2(token)
-                        .log()
-                        .all().
+        return given().auth()
+                .oauth2(token)
+                .log()
+                .all().
                 when()
-                        .get("/workspaces");
-        return response;
+                .get("/workspaces");
+    }
+
+    public Response sendPOST_project(String token, File file) {
+        return given().auth()
+                .oauth2(token)
+                .log()
+                .all()
+                .body(file).
+                when()
+                .post("workspaces/1201629956799661/projects");
     }
 }

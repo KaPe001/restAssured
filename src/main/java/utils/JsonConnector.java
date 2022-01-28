@@ -1,9 +1,11 @@
 package utils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import lombok.extern.slf4j.Slf4j;
 import models.Workspace;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.io.FileUtils;
 import testBase.Data;
 
 import java.io.BufferedReader;
@@ -11,15 +13,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+@Slf4j
 public class JsonConnector {
-    static Logger logger = LoggerFactory.getLogger(JsonConnector.class);
 
     public static Data readData(File file) {
         try {
             Gson parser = new Gson();
             BufferedReader buffer = new BufferedReader(new FileReader(file));
-            Data data = parser.fromJson(buffer, Data.class);
-            return data;
+            return parser.fromJson(buffer, Data.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,12 +32,26 @@ public class JsonConnector {
             Gson parser = new Gson();
             BufferedReader buffer = new BufferedReader(new FileReader(file));
             Workspace workspace = parser.fromJson(buffer, Workspace.class);
-            logger.info("Workspace has been loaded properly: {}", workspace);
+            log.info("Workspace has been loaded properly: {}", workspace);
             return workspace;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static File updateJsonFile(File file, String value, String replacement) throws IOException {
+        String jsonString = FileUtils.readFileToString(file);
+
+        String updatedJsonString = jsonString.replace(value, replacement);
+
+        JsonElement jelement = new JsonParser().parse(updatedJsonString);
+
+        Gson gson = new Gson();
+        String resultingJson = gson.toJson(jelement);
+        FileUtils.writeStringToFile(file, resultingJson);
+        log.info("File: {} updated", file);
+        return file;
     }
 
     public static String jsonSerializerWorkspace(Workspace workspace) {

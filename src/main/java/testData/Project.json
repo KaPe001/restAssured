@@ -1,0 +1,27 @@
+{
+  "data": {
+    "archived": false,
+    "color": "dark-green",
+    "current_status": {
+      "author": {
+        "name": "Kinga"
+      },
+      "color": "red",
+      "created_by": {
+        "name": "Kinga"
+      },
+      "html_text": "\u003cbody\u003e some HTML text \u003c/body\u003e",
+      "text": "No text provided",
+      "title": "my title"
+    },
+    "default_view": "board",
+    "due_date": "2019-09-15",
+    "due_on": "2019-09-15",
+    "html_notes": "\u003cbody\u003e some HTML note \u003c/body\u003e",
+    "is_template": false,
+    "name": "nazwa",
+    "notes": "No notes provided",
+    "public": false,
+    "start_on": "2019-09-14"
+  }
+}

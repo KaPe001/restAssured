@@ -8,10 +8,12 @@ Feature: Testing new asana project
 
   @Post
   Scenario Outline: create new project
-    Given i have a new project object
-    When user performs asana POST project
-    Then User is able to see response with new project
+    Given I save name data "<name>"
+    And I save title data "<title>"
+    When User performs asana POST project
+    Then User is able to see response with new project "<name>"
 
     Examples:
-    |params|
-    |workspaceID=,
+      | name        | title                                    |
+      | SoupUI      | Nice title for SoupUI project            |
+      | RestAssured | Even nicer title for RestAssured project |
