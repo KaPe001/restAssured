@@ -16,11 +16,11 @@ import java.io.IOException;
 @Slf4j
 public class JsonConnector {
 
-    public static Data readData(File file) {
+    public static <T> T readData(File file, Class<T> classOfT) {
         try {
             Gson parser = new Gson();
             BufferedReader buffer = new BufferedReader(new FileReader(file));
-            return parser.fromJson(buffer, Data.class);
+            return parser.fromJson(buffer, classOfT);
         } catch (IOException e) {
             e.printStackTrace();
         }
