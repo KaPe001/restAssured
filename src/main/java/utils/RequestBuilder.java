@@ -16,7 +16,7 @@ public class RequestBuilder extends TestBase {
                 .oauth2(token)
                 .log()
                 .all().
-                when()
+        when()
                 .get("/workspaces");
     }
 
@@ -26,7 +26,17 @@ public class RequestBuilder extends TestBase {
                 .log()
                 .all()
                 .body(file).
-                when()
-                .post("workspaces/1201629956799661/projects");
+        when()
+                .post("workspaces/" + workspace.getGid() + "/projects");
+    }
+
+    public Response sendPUT_project(String token) {
+        return given().auth()
+                .oauth2(token)
+                .log()
+                .all()
+                .body(new File(PROJECT_UPDATE_PATH)).
+        when()
+                .put("/projects/" + projectData.getGid());
     }
 }
