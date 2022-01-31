@@ -1,7 +1,7 @@
 {
   "data": {
     "archived": false,
-    "color": "dark-green",
+    "color": "dark-pink",
     "current_status": {
       "author": {
         "name": "Kinga"
@@ -19,7 +19,7 @@
     "due_on": "2019-09-15",
     "html_notes": "\u003cbody\u003e some HTML note \u003c/body\u003e",
     "is_template": false,
-    "name": "nazwa",
+    "name": "DemoRestAssured",
     "notes": "No notes provided",
     "public": false,
     "start_on": "2019-09-14"

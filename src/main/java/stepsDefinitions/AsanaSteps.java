@@ -3,6 +3,7 @@ package stepsDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.extern.slf4j.Slf4j;
 import models.Workspace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,15 +15,15 @@ import java.io.File;
 
 import static org.hamcrest.core.Is.is;
 
+@Slf4j
 public class AsanaSteps extends TestBase {
-    private static Logger logger = LoggerFactory.getLogger(AsanaSteps.class);
     Workspace workspace;
 
     private static String token = data.getToken();
 
     @Given("i have workspace object")
     public void i_have_workspace_object() {
-        workspace = JsonConnector.fillWorkspaceData(new File(WORKSPACE_PATH));
+        workspace = JsonConnector.fillTheData(new File(WORKSPACE_PATH), Workspace.class);
         requestBuilder = new RequestBuilder();
     }
 
@@ -36,12 +37,11 @@ public class AsanaSteps extends TestBase {
         response.then()
                 .log()
                 .all()
-                .body("data[0].projectName", is(workspace.getName()))
                 .body("data[0].gid", is(workspace.getGid()))
+                .body("data[0].name", is(workspace.getName()))
                 .body("data[0].resource_type", is(workspace.getResource_type()))
                 .statusCode(200);
         response = null;
-        logger.info("Validation pass");
+        log.info("Validation pass");
     }
-
 }

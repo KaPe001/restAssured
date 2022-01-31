@@ -27,13 +27,13 @@ public class JsonConnector {
         return null;
     }
 
-    public static Workspace fillWorkspaceData(File file) {
+    public static <T> T fillTheData(File file, Class<T> classOfT) {
         try {
             Gson parser = new Gson();
             BufferedReader buffer = new BufferedReader(new FileReader(file));
-            Workspace workspace = parser.fromJson(buffer, Workspace.class);
-            log.info("Workspace has been loaded properly: {}", workspace);
-            return workspace;
+            T t = parser.fromJson(buffer, classOfT);
+            log.info("Object class has been loaded properly: {}", t);
+            return t;
         } catch (IOException e) {
             e.printStackTrace();
         }
