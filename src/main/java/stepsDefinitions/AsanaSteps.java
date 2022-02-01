@@ -5,8 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
 import models.Workspace;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import testBase.TestBase;
 import utils.JsonConnector;
 import utils.RequestBuilder;
@@ -25,11 +23,13 @@ public class AsanaSteps extends TestBase {
     public void i_have_workspace_object() {
         workspace = JsonConnector.fillTheData(new File(WORKSPACE_PATH), Workspace.class);
         requestBuilder = new RequestBuilder();
+        log.info("Data filled for workspace object");
     }
 
     @When("user performs GET workspace operation")
     public void user_performs_GET_workspace_operation() {
         response = requestBuilder.sendGET_workspace(token);
+        log.info("GET request sent");
     }
 
     @Then("user is able to see valid response with workspace details")

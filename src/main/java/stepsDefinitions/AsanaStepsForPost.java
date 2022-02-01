@@ -24,17 +24,21 @@ public class AsanaStepsForPost extends TestBase {
     public void iSaveNameData(String feature) throws IOException {
         copyFile = MakeCopy.getCopyOfProjectFile();
         JsonConnector.updateJsonFile(copyFile, "nazwa", feature);
+        log.info("Copy of a file created\nJson file name updated properly");
     }
 
     @And("I save title data {string}")
     public void iSaveTitleData(String feature) throws IOException {
         JsonConnector.updateJsonFile(copyFile, "my title", feature);
+        log.info("Copy of a file created\nJson file title updated properly");
+
     }
 
     @When("User performs asana POST project")
     public void userPerformsAsanaPOSTProject() {
         requestBuilder = new RequestBuilder();
         response = requestBuilder.sendPOST_project(TOKEN, copyFile);
+        log.info("POST request sent properly");
     }
 
     @Then("User is able to see response with new project name {string}")
