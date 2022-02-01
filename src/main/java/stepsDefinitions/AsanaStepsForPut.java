@@ -22,7 +22,6 @@ public class AsanaStepsForPut extends TestBase {
 
     @When("User performs PUT request to update project")
     public void userPerformsPUTRequestToUpdateProject() {
-        requestBuilder = new RequestBuilder();
         response = requestBuilder.sendPUT_project(TOKEN);
 
     }

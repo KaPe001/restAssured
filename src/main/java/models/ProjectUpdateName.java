@@ -11,6 +11,7 @@ public class ProjectUpdateName {
     @Getter
     @Setter
     public class Data {
+        private String color;
         private String name;
 
     }

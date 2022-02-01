@@ -39,4 +39,15 @@ public class RequestBuilder extends TestBase {
         when()
                 .put("/projects/" + projectData.getGid());
     }
+
+    public Response sendDELETE_project(String token, File file, String gid) {
+        return given().auth()
+                .oauth2(token)
+                .log()
+                .all()
+                .body(file).
+                when()
+                .delete("/projects/" + gid);
+
+    }
 }
