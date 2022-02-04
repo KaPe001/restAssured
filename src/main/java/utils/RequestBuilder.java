@@ -66,5 +66,11 @@ public class RequestBuilder extends TestBase {
 
     }
 
-
+    //-----------------------------------------------------------------------------------------------------//
+    //when you want to return value as a big decimal instead of float (f) or double (d), you can use
+    //JsonConfig:
+    //given()
+    //        .config(RestAssured.config().jsonConfig(jsonConfig().numberReturnType(BIG_DECIMAL)))
+    //.when().get("/price").
+    //then().body("price", is(new BigDecimal(xx.xx));
 }
