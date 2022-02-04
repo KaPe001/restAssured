@@ -21,16 +21,6 @@ public class JsonPlaceholder extends TestBase {
     }
 
     @Test
-    public void shouldGetFirstUser() {
-        when()
-                .get(BASE_URL + USERS + "/1").
-        then()
-                .statusCode(200)
-                .extract()
-                .response();
-    }
-
-    @Test
     public void shouldGetFirstUserUsingQueryParam() {
         Response response =
                 given()
