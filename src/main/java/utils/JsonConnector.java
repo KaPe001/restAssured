@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
+import models.ResponseBody;
 import models.Workspace;
 import org.apache.commons.io.FileUtils;
 
@@ -11,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Wrapper;
 
 @Slf4j
 public class JsonConnector {
@@ -24,6 +26,12 @@ public class JsonConnector {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static <T> T readDataForArray(File file, Class<T> classOfT) {
+        Gson parser = new Gson();
+        ResponseBody[] data = parser.fromJson(String.valueOf(file), ResponseBody[].class);
+        return (T) data;
     }
 
     public static <T> T fillTheData(File file, Class<T> classOfT) {

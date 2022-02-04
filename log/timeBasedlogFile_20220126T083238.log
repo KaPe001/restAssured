@@ -1,2 +1,2 @@
 136 [main] INFO  utils.JsonConnector - Workspace has been loaded properly: Workspace{gid='1201005100247837', name='HR', resource_type='workspace'}
-3213 [main] INFO  stepsDefinitions.AsanaSteps - Validation pass
+3213 [main] INFO  stepsDefinitions.AsanaStepsGetWorkspace - Validation pass

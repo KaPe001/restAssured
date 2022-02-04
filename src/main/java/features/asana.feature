@@ -1,10 +1,16 @@
 Feature: Testing new asana project
 
-  @Get
+  @GetWorkspace
   Scenario: Get workspace details
     Given i have workspace object
     When user performs GET workspace operation
     Then user is able to see valid response with workspace details
+
+  @GetProjects
+  Scenario: Get projects details
+    Given i have project object
+    When user performs GET project operation
+    Then user is able to see valid response with project details
 
   @Post
   Scenario Outline: Create new project
@@ -25,12 +31,12 @@ Feature: Testing new asana project
     Then User is able to see the change in a project named RestAssured
 
   @Delete
-  Scenario Outline: Delete projects that were created by POST request
+  Scenario: Delete projects previously created
     Given I have created two projects
-    When User performs DELETE request on projects with "<project_gid>"
+    When User performs DELETE request on projects
     Then User is able to see that projects no longer exists
 
-    Examples:
-      | project_gid      |
-      | 1201749752170227 |
-      | 1201749806443865 |
+#    Examples:
+#      | gid              |
+#      | 1201750203551983 |
+#      | 1201750150700772 |

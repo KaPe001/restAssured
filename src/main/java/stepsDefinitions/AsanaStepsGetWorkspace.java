@@ -14,7 +14,7 @@ import java.io.File;
 import static org.hamcrest.core.Is.is;
 
 @Slf4j
-public class AsanaSteps extends TestBase {
+public class AsanaStepsGetWorkspace extends TestBase {
     Workspace workspace;
 
     private static String token = data.getToken();
