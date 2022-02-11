@@ -9,13 +9,12 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class TestBase {
-    public static Logger logger = LoggerFactory.getLogger(YamlReader.class);
     public static PropertyConfig property;
 
     @BeforeAll
@@ -24,9 +23,9 @@ public class TestBase {
         RestAssured.authentication = RestAssured.oauth2("1/1201629892164949:d726687d7214eb9fe9e023fb2acd6309");
 
         RestAssured.requestSpecification = setCommonRequest();
-        logger.info("Common request used");
+        log.info("Common request used");
         RestAssured.responseSpecification = setCommonResponse();
-        logger.info("Common response used");
+        log.info("Common response used");
     }
 
     public static RequestSpecification setCommonRequest() {

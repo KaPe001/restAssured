@@ -9,7 +9,6 @@ import utils.JsonConnector;
 import utils.RequestBuilder;
 
 import java.io.File;
-import java.util.List;
 
 public class TestBase {
     protected final static String DATA_PATH = "src/main/java/testData/Data.json";

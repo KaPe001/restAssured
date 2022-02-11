@@ -1,6 +1,8 @@
 package utils;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import testBase.TestBase;
@@ -24,12 +26,14 @@ public class RequestBuilder extends TestBase {
     }
 
     public Response sendGET_project(String token) {
-         return  given().auth()
-                .oauth2(token)
-                .log()
-                .all().
-                when()
-                .get("/projects");
+        return given().auth()
+                .oauth2(token).
+        when()
+                .get("/projects").
+        then()
+                 .contentType(ContentType.JSON)
+                 .extract()
+                .response();
     }
 
     public Response sendPOST_project(String token, File file) {
@@ -58,7 +62,7 @@ public class RequestBuilder extends TestBase {
                 .log()
                 .all()
                 .body(file).
-                when()
+        when()
                 .delete("/projects/" + responseBody.getData().get(0).getGid());
 
 
@@ -69,8 +73,12 @@ public class RequestBuilder extends TestBase {
     //-----------------------------------------------------------------------------------------------------//
     //when you want to return value as a big decimal instead of float (f) or double (d), you can use
     //JsonConfig:
-    //given()
-    //        .config(RestAssured.config().jsonConfig(jsonConfig().numberReturnType(BIG_DECIMAL)))
-    //.when().get("/price").
-    //then().body("price", is(new BigDecimal(xx.xx));
+    //      given()
+    //              .config(RestAssured.config()
+    //              .jsonConfig(jsonConfig()
+    //              .numberReturnType(BIG_DECIMAL))).
+    //      when()
+    //              .get("/price").
+    //      then()
+    //              .body("price", is(new BigDecimal(xx.xx));
 }

@@ -24,7 +24,9 @@ public class AsanaStepsForDelete extends TestBase {
 
     @When("User performs DELETE request on projects")
     public void user_performs_DELETE_request() {
+        response = requestBuilder.sendGET_project(TOKEN);
         response = requestBuilder.sendDELETE_project(TOKEN, new File(PROJECT_PATH));
+
         log.info("DELETE request sent properly");
     }
     @Then("User is able to see that projects no longer exists")

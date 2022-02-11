@@ -1,23 +1,26 @@
 package stepsDefinitions;
 
+import configuration.forAsana.Config;
+import configuration.forAsana.PropertyForAsana;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.restassured.RestAssured;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.logging.Logger;
-
+@Slf4j
 public class Hooks {
-//    Logger logger = LoggerFactory(Hooks.class)
+    Config config;
 
     @Before(order = 1)
     public void getTitle(Scenario scenario) {
         System.out.println("Start scenario " + scenario.getName());
+        log.info("Scenario started properly");
     }
 
     @Before(order = 2)
     public void getData() {
-        RestAssured.baseURI="https://app.asana.com";
-        RestAssured.basePath="/api/1.0"; //TODO add configuration file for baseURI and PATH
+        RestAssured.baseURI= config.getProperties().get("baseUri");
+        RestAssured.basePath= config.getProperties().get("basePath");
+        log.info("Commons taken from the configuration file properly");
     }
 }
